@@ -1,6 +1,4 @@
 //0. Let x = 10;
-
-
 //1. Define the types of tokens that can be used in the parser
 export enum TokenType {
     Number,
@@ -10,6 +8,7 @@ export enum TokenType {
     CloseParen,
     Assignment,
     Let,
+    EOF
 }
 
 const KEYWORDS: Record<string, TokenType> = {
@@ -24,7 +23,7 @@ export interface Token{
 }
 
 //4. Create a function that will create a token
-export function token(src = "", type: TokenType): Token{
+function token(src = "", type: TokenType): Token{
     return {value: src, type: type}
 }
 
@@ -57,7 +56,7 @@ export function Tokenize(sourcecode: string) : Token[]{
             tokens.push(token(src.shift(), TokenType.CloseParen));
         } else if (src[0] == '='){
             tokens.push(token(src.shift(), TokenType.Assignment));
-        } else if (src[0] == '+' || src[0] == '-' || src[0] == '*' || src[0] == '/'){
+        } else if (src[0] == '+' || src[0] == '-' || src[0] == '*' || src[0] == '/' || src[0] == '%'){
             tokens.push(token(src.shift(), TokenType.BinaryOperator));
         } else{
             //6. Multiple characters can be part of a number or identifier
@@ -86,14 +85,15 @@ export function Tokenize(sourcecode: string) : Token[]{
             }
         }
     }
-
+    tokens.push(token("EndOfFile", TokenType.EOF));
     return tokens;
 }
 
-const source = await Deno.readTextFile("test.txt");
-for (const token of Tokenize(source)){
-    console.log(token);
-}
+// //7. Test the Tokenize function with a sample source code
+// const source = await Deno.readTextFile("test.txt");
+// for (const token of Tokenize(source)){
+//     console.log(token);
+// }
 
 
 

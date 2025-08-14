@@ -1,0 +1,30 @@
+| Python Keyword / Function | Sanskrit Equivalent | Meaning                  |
+| ------------------------- | ------------------- | ------------------------ |
+| `if`                      | `yadi`              | यदि — if                 |
+| `elif`                    | `anyatha_yadi`      | अन्यथा यदि — else if      |
+| `else`                    | `anyatha`           | अन्यथा — otherwise       |
+| `while`                   | `yavat`             | यावत् — while            |
+| `for`                     | `sarve`             | सर्वे — for all          |
+| `in`                      | `madhye`            | मध्ये — in/among         |
+| `not`                     | `na`                | न — not                  |
+| `and`                     | `ca`                | च — and                  |
+| `or`                      | `va`                | वा — or                  |
+| `def`                     | `nirvachana`        | निर्वचन — definition     |
+| `return`                  | `pratyarpayatu`     | प्रत्यर्पयतु — return    |
+| `break`                   | `uccheda`           | उच्छेद — break           |
+| `continue`                | `anugacchatu`       | अनुगच्छतु — continue     |
+| `class`                   | `varga`             | वर्ग — class             |
+| `True`                    | `satya`             | सत्य — true              |
+| `False`                   | `mithya`            | मिथ्या — false           |
+| `None`                    | `shunya`            | शून्य — none             |
+| `print()`                 | `mudrayatu()`       | मुद्रयतु — print/display |
+| `input()`                 | `grahanam()`        | ग्रहणम् — take input     |
+| `len()`                   | `dirgham()`         | दीर्घम् — length         |
+| `range()`                 | `paridhi()`         | परिधि — range            |
+| `list`                    | `suchi`             | सूची — list              |
+| `dict`                    | `kosh`              | कोश — dictionary         |
+| `set`                     | `samuh`             | समूह — set/group         |
+| `str`                     | `sutra`             | सूत्र — string           |
+| `int`                     | `purna`             | पूर्ण — integer          |
+| `float`                   | `taral`             | तरल — float              |
+| `import`                  | `aagaman`           | आगमन — import            |
