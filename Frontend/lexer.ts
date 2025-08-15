@@ -8,11 +8,13 @@ export enum TokenType {
     CloseParen,
     Assignment,
     Let,
+    Null,
     EOF
 }
 
 const KEYWORDS: Record<string, TokenType> = {
-    'Let': TokenType.Let
+    'Let': TokenType.Let,
+    'null': TokenType.Null
 }
 
 
@@ -51,13 +53,13 @@ export function Tokenize(sourcecode: string) : Token[]{
     while(src.length > 0){
         //5. 
         if (src[0] == '('){
-            tokens.push(token(src.shift(), TokenType.OpenParen));
+            tokens.push(token(src.shift(), TokenType.OpenParen)); //OpenParen
         }else if (src[0] == ')'){
-            tokens.push(token(src.shift(), TokenType.CloseParen));
+            tokens.push(token(src.shift(), TokenType.CloseParen)); //closeParen
         } else if (src[0] == '='){
-            tokens.push(token(src.shift(), TokenType.Assignment));
+            tokens.push(token(src.shift(), TokenType.Assignment)); //Assignment
         } else if (src[0] == '+' || src[0] == '-' || src[0] == '*' || src[0] == '/' || src[0] == '%'){
-            tokens.push(token(src.shift(), TokenType.BinaryOperator));
+            tokens.push(token(src.shift(), TokenType.BinaryOperator)); // BinaryOperator
         } else{
             //6. Multiple characters can be part of a number or identifier
             if (isdigit(src[0])){
@@ -65,18 +67,20 @@ export function Tokenize(sourcecode: string) : Token[]{
                 while(src.length > 0 && isdigit(src[0])){
                     num += src.shift();
                 }
-                tokens.push(token(num, TokenType.Number));
+                tokens.push(token(num, TokenType.Number)); // Number
             } else if (isalpha(src[0])){
                 let iden = "";
                 while(src.length > 0 && isalpha(src[0])){
                     iden += src.shift();
                 }
+
                 const reservedWords = KEYWORDS[iden]
                 if (reservedWords != undefined){
-                    tokens.push(token(iden, reservedWords));
+                    tokens.push(token(iden, reservedWords)); // ReservedKeyword
                 } else {
-                    tokens.push(token(iden, TokenType.Identifier));
+                    tokens.push(token(iden, TokenType.Identifier)); // Identifier
                 }
+                
             } else if (isskipable(src[0])){
                 src.shift();
             } else{
@@ -85,7 +89,7 @@ export function Tokenize(sourcecode: string) : Token[]{
             }
         }
     }
-    tokens.push(token("EndOfFile", TokenType.EOF));
+    tokens.push(token("EndOfFile", TokenType.EOF)); // EOF
     return tokens;
 }
 

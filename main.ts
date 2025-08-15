@@ -1,10 +1,11 @@
 import Parser from "./Frontend/parser.ts";
+import { evaluate } from "./runtime/interpreter.ts";
 
 xyz();
 
 function xyz(){
     const parser = new Parser();
-    console.log("New Lang 1.0")
+    console.log("New Lang v0.1")
     while (true){
         const input = prompt(">>> ");
 
@@ -13,6 +14,18 @@ function xyz(){
         }
 
         const program = parser.ProduceAST(input);
-        console.log(program);
+        //console.log(program);
+
+        //console.log("\n----------------------\n")
+        
+        const result = evaluate(program);
+        
+        try{
+            console.log(result.value);
+        } catch{
+            console.log(result);
+        }
+       
+        //console.log("\n----------------------\n")
     }
 }
