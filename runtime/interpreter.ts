@@ -1,5 +1,6 @@
-import { RuntimeVal, NumberVal, NullVal } from "./value.ts";
-import { Program, BinaryExpression, NumericLiteral, Stmt } from "../Frontend/ast.ts";
+import { RuntimeVal, NumberVal, NullVal, MK_NULL } from "./value.ts";
+import { Program, BinaryExpression, NumericLiteral, Stmt, Identifier, VarDeclaration } from "../Frontend/ast.ts";
+import Environment from "./environment.ts";
 
 export function eval_num_Expr(
     lhs: NumberVal,
@@ -27,9 +28,9 @@ export function eval_num_Expr(
     
 }
 
-export function evaluate_binary_expr(binop: BinaryExpression): RuntimeVal {
-    const lhs = evaluate(binop.left);
-    const rhs = evaluate(binop.right);
+export function evaluate_binary_expr(binop: BinaryExpression, env: Environment): RuntimeVal {
+    const lhs = evaluate(binop.left,env );
+    const rhs = evaluate(binop.right, env);
 
     if (lhs.kind == "number" && rhs.kind == "number"){
         return eval_num_Expr(
@@ -46,22 +47,36 @@ export function evaluate_binary_expr(binop: BinaryExpression): RuntimeVal {
 
 }
 
-export function evaluate_program(program: Program): RuntimeVal {
+export function evaluate_program(program: Program, env: Environment): RuntimeVal {
     let lasteval: RuntimeVal = {
         kind: "null",
         value: "null"
     } as NullVal;
 
     for (const statement of program.body){
-        lasteval = evaluate(statement);
+        lasteval = evaluate(statement, env);
     }
 
     return lasteval;
 }
 
+function eval_identifier(iden: Identifier, env: Environment): RuntimeVal {
+    const val = env.lookupvar(iden.name);
+    return val;
+}
 
+function eval_var_declare(declare: VarDeclaration, env: Environment): RuntimeVal {
+    
+    const value = declare.value ? evaluate(declare.value, env) : MK_NULL();
 
-export function evaluate(ASTnode: Stmt) : RuntimeVal {
+    return env.declarevar(
+        declare.identifier,
+        value,
+        declare.constant
+    )
+}
+
+export function evaluate(ASTnode: Stmt, env: Environment) : RuntimeVal {
     
     switch (ASTnode.kind){
 
@@ -80,14 +95,20 @@ export function evaluate(ASTnode: Stmt) : RuntimeVal {
         }
 
         case "BinaryExpression": {
-            return evaluate_binary_expr(ASTnode as BinaryExpression);
+            return evaluate_binary_expr(ASTnode as BinaryExpression, env);
         }
 
         case "Program": {
-            return evaluate_program(ASTnode as Program);
+            return evaluate_program(ASTnode as Program, env);
         }
 
-        //case "Identifier":
+        case "Identifier": {
+            return eval_identifier(ASTnode as Identifier, env);
+        }
+
+        case "VarDeclaration": {
+            return eval_var_declare(ASTnode as VarDeclaration, env);
+        }
 
         default:
             console.error("This node is yet to be interpreted", ASTnode);

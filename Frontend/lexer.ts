@@ -1,19 +1,28 @@
 //0. Let x = 10;
 //1. Define the types of tokens that can be used in the parser
 export enum TokenType {
+    //Literal Types
     Number,
     Identifier,
+    Float,
+    Null,
+
+    //Grping * Operators
     BinaryOperator,
+    SemiColon,
     OpenParen,
     CloseParen,
     Assignment,
+    EOF,
+
+    //Keywords
     Let,
-    Null,
-    EOF
+    Const,
 }
 
 const KEYWORDS: Record<string, TokenType> = {
-    'Let': TokenType.Let,
+    Let: TokenType.Let,
+    Const: TokenType.Const,
     'null': TokenType.Null
 }
 
@@ -60,6 +69,8 @@ export function Tokenize(sourcecode: string) : Token[]{
             tokens.push(token(src.shift(), TokenType.Assignment)); //Assignment
         } else if (src[0] == '+' || src[0] == '-' || src[0] == '*' || src[0] == '/' || src[0] == '%'){
             tokens.push(token(src.shift(), TokenType.BinaryOperator)); // BinaryOperator
+        } else if ( src[0]==';' ){
+            tokens.push(token(src.shift(), TokenType.SemiColon)); // BinaryOperator
         } else{
             //6. Multiple characters can be part of a number or identifier
             if (isdigit(src[0])){

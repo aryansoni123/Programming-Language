@@ -4,6 +4,7 @@
 // The AST is used to represent the structure of the code in a way that is easy to understand
 export type NodeType = 
     "Program" |
+    "VarDeclaration" |
     "NumericLiteral" |
     "NullLiteral" |
     "Identifier" |
@@ -18,6 +19,13 @@ export interface Stmt {
 export interface Program extends Stmt{
     kind: "Program";
     body: Stmt[]; 
+}
+
+export interface VarDeclaration extends Stmt{
+    kind: "VarDeclaration";
+    constant: boolean;
+    identifier: string;
+    value?: Expression; 
 }
 
 // The Expression interface is used for all expressions in the AST
