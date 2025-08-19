@@ -1,5 +1,5 @@
 import { RuntimeVal, NumberVal, NullVal, MK_NULL } from "./value.ts";
-import { Program, BinaryExpression, NumericLiteral, Stmt, Identifier, VarDeclaration } from "../Frontend/ast.ts";
+import { Program, BinaryExpression, NumericLiteral, Stmt, Identifier, VarDeclaration, AssignmentExpression, Expression } from "../Frontend/ast.ts";
 import Environment from "./environment.ts";
 
 export function eval_num_Expr(
@@ -76,6 +76,14 @@ function eval_var_declare(declare: VarDeclaration, env: Environment): RuntimeVal
     )
 }
 
+function eval_assign_expr(AssignExpr: AssignmentExpression, env: Environment): RuntimeVal {
+    if (AssignExpr.assigne.kind !== "Identifier") {
+        throw  `Need a proper Assigne.`
+    }
+    const varname = ((AssignExpr.assigne)as Identifier).name;
+    return env.assignvar(varname, evaluate(AssignExpr.value, env))
+}
+
 export function evaluate(ASTnode: Stmt, env: Environment) : RuntimeVal {
     
     switch (ASTnode.kind){
@@ -108,6 +116,10 @@ export function evaluate(ASTnode: Stmt, env: Environment) : RuntimeVal {
 
         case "VarDeclaration": {
             return eval_var_declare(ASTnode as VarDeclaration, env);
+        }
+
+        case "AssignmentExpression": {
+            return eval_assign_expr(ASTnode as AssignmentExpression, env);
         }
 
         default:

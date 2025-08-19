@@ -11,6 +11,10 @@ export enum TokenType {
     BinaryOperator,
     SemiColon,
     OpenParen,
+    Comma,
+    Colon,
+    OpenBrace,
+    CloseBrace,
     CloseParen,
     Assignment,
     EOF,
@@ -21,8 +25,8 @@ export enum TokenType {
 }
 
 const KEYWORDS: Record<string, TokenType> = {
-    Let: TokenType.Let,
-    Const: TokenType.Const,
+    maan: TokenType.Let,
+    sthir: TokenType.Const,
     'null': TokenType.Null
 }
 
@@ -49,7 +53,7 @@ export function isdigit(src: string){
 }
 
 export function isskipable(src: string){
-    return src == ' ' || src == '\n' || src == '\t';
+    return (src == ' ' || src == '\n' || src == '\r' || src == '\t');
 }
 
 //3. Create a function that will tokenize the source code
@@ -58,6 +62,7 @@ export function isskipable(src: string){
 export function Tokenize(sourcecode: string) : Token[]{
     const tokens = new Array<Token>();
     const src = sourcecode.split("");
+    //console.log(src);
 
     while(src.length > 0){
         //5. 
@@ -65,12 +70,20 @@ export function Tokenize(sourcecode: string) : Token[]{
             tokens.push(token(src.shift(), TokenType.OpenParen)); //OpenParen
         }else if (src[0] == ')'){
             tokens.push(token(src.shift(), TokenType.CloseParen)); //closeParen
+        }else if (src[0] == '['){
+            tokens.push(token(src.shift(), TokenType.OpenBrace)); //closeParen
+        }else if (src[0] == ']'){
+            tokens.push(token(src.shift(), TokenType.CloseBrace)); //closeParen
         } else if (src[0] == '='){
             tokens.push(token(src.shift(), TokenType.Assignment)); //Assignment
         } else if (src[0] == '+' || src[0] == '-' || src[0] == '*' || src[0] == '/' || src[0] == '%'){
             tokens.push(token(src.shift(), TokenType.BinaryOperator)); // BinaryOperator
         } else if ( src[0]==';' ){
-            tokens.push(token(src.shift(), TokenType.SemiColon)); // BinaryOperator
+            tokens.push(token(src.shift(), TokenType.SemiColon)); 
+        } else if ( src[0]==',' ){
+            tokens.push(token(src.shift(), TokenType.Comma)); 
+        } else if ( src[0]==':' ){
+            tokens.push(token(src.shift(), TokenType.Colon)); 
         } else{
             //6. Multiple characters can be part of a number or identifier
             if (isdigit(src[0])){

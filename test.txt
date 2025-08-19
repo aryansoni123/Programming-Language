@@ -1,1 +1,2 @@
-Let x = 45 * (arin * bitd)
+maan x =45;
+x =162;

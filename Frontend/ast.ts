@@ -5,6 +5,7 @@
 export type NodeType = 
     "Program" |
     "VarDeclaration" |
+    "AssignmentExpression" |
     "NumericLiteral" |
     "NullLiteral" |
     "Identifier" |
@@ -31,6 +32,12 @@ export interface VarDeclaration extends Stmt{
 // The Expression interface is used for all expressions in the AST
 
 export interface Expression extends Stmt{}
+
+export interface AssignmentExpression extends Expression {
+    kind: "AssignmentExpression";
+    assigne: Expression;
+    value: Expression;
+}
 
 // The BinaryExpression interface represents a binary expression in the AST
 export interface BinaryExpression extends Expression {

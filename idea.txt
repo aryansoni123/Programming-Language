@@ -28,3 +28,6 @@
 | `int`                     | `purna`             | पूर्ण — integer          |
 | `float`                   | `taral`             | तरल — float              |
 | `import`                  | `aagaman`           | आगमन — import            |
+ | `let`                     | bhavatu             | “let there be …” |
+ | `const`                   | sthira              | “fixed/constant” |
+
