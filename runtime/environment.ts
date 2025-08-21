@@ -1,11 +1,15 @@
 import { RuntimeVal } from "./value.ts";
 import { MK_BOOL, MK_NULL} from "./value.ts";
 
-function setupscope(env: Environment) {
+export function CreateGlobalEnv() {
     // Global Variables
+
+    const env = new Environment();
     env.declarevar("nirastra", MK_NULL(), true)
     env.declarevar('asatya', MK_BOOL(false), true)
     env.declarevar('satya', MK_BOOL(true), true)
+
+    return env;
 }
 
 export default class Environment{
@@ -19,10 +23,6 @@ export default class Environment{
         this.parent = parentENV;
         this.variables = new Map();
         this.constants = new Set();
-
-        if (Global){
-            setupscope(this);
-        }
     }
 
     public declarevar (

@@ -21,7 +21,7 @@ export interface BoolVal extends RuntimeVal {
 
 export interface ObjectVal extends RuntimeVal {
     kind: "object",
-    value: Map<string, RuntimeVal>;
+    property: Map<string, RuntimeVal>;
 }
 
 //Creation Functions

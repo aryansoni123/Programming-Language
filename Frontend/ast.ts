@@ -1,7 +1,6 @@
 // Frontend/ast.ts
 // This file defines the structure of the Abstract Syntax Tree (AST) nodes
 
-import { RuntimeVal } from "../runtime/value.ts";
 
 // The AST is used to represent the structure of the code in a way that is easy to understand
 export type NodeType = 

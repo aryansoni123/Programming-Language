@@ -1,7 +1,9 @@
+maan z = 20;
+
 sthir y = {
     x: satya,
     y: nirastra,
-    z,
+    z: z,
     b: 45,
     mix: {
         a: asatya,
