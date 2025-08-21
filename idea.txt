@@ -14,9 +14,9 @@
 | `break`                   | `uccheda`           | उच्छेद — break           |
 | `continue`                | `anugacchatu`       | अनुगच्छतु — continue     |
 | `class`                   | `varga`             | वर्ग — class             |
-| `True`                    | `satya`             | सत्य — true              |
-| `False`                   | `mithya`            | मिथ्या — false           |
-| `None`                    | `shunya`            | शून्य — none             |
+ | `True`                    | `satya`             | सत्य — true              |
+ | `False`                   | `mithya`            | मिथ्या — false           |
+ | `None`                    | `shunya`            | शून्य — none             |
 | `print()`                 | `mudrayatu()`       | मुद्रयतु — print/display |
 | `input()`                 | `grahanam()`        | ग्रहणम् — take input     |
 | `len()`                   | `dirgham()`         | दीर्घम् — length         |

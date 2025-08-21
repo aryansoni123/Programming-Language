@@ -9,11 +9,13 @@ run('test.txt')
 async function run(filename: string) {
     const parser = new Parser();
     const env = new Environment();
-
+    //console.log(env.lookupvar("satya"));
+    
     const input = await Deno.readTextFile(filename);
     const program = parser.ProduceAST(input);
+    console.log(program);
     const result = evaluate(program, env);
-
+    
     console.log(result);
 
 }
@@ -21,6 +23,9 @@ async function run(filename: string) {
 function xyz(){
     const parser = new Parser();
     const env = new Environment();
+    //console.log(env.lookupvar("satya"));
+
+    console.log(env.lookupvar)
 
     console.log("New Lang v0.1")
     while (true){
@@ -31,7 +36,6 @@ function xyz(){
         }
 
         const program = parser.ProduceAST(input);
-        //console.log(program);
         const result = evaluate(program, env);
         console.log(result);
     }

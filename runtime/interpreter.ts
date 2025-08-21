@@ -22,7 +22,7 @@ export function eval_num_Expr(
         result = lhs.value % rhs.value;
 
     return {
-        kind: "number",
+        kind: "sankhya",
         value: result
     } as NumberVal;
     
@@ -32,7 +32,7 @@ export function evaluate_binary_expr(binop: BinaryExpression, env: Environment):
     const lhs = evaluate(binop.left,env );
     const rhs = evaluate(binop.right, env);
 
-    if (lhs.kind == "number" && rhs.kind == "number"){
+    if (lhs.kind == "sankhya" && rhs.kind == "sankhya"){
         return eval_num_Expr(
             lhs as NumberVal,
             rhs as NumberVal,
@@ -90,7 +90,7 @@ export function evaluate(ASTnode: Stmt, env: Environment) : RuntimeVal {
 
         case "NumericLiteral": {
             return {
-                kind: "number",
+                kind: "sankhya",
                 value : ((ASTnode as NumericLiteral).value)
             } as NumberVal;
         }

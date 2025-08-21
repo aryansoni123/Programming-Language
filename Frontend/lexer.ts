@@ -10,11 +10,11 @@ export enum TokenType {
     //Grping * Operators
     BinaryOperator,
     SemiColon,
-    OpenParen,
     Comma,
     Colon,
     OpenBrace,
     CloseBrace,
+    OpenParen,
     CloseParen,
     Assignment,
     EOF,
@@ -70,9 +70,9 @@ export function Tokenize(sourcecode: string) : Token[]{
             tokens.push(token(src.shift(), TokenType.OpenParen)); //OpenParen
         }else if (src[0] == ')'){
             tokens.push(token(src.shift(), TokenType.CloseParen)); //closeParen
-        }else if (src[0] == '['){
+        }else if (src[0] == '{'){
             tokens.push(token(src.shift(), TokenType.OpenBrace)); //closeParen
-        }else if (src[0] == ']'){
+        }else if (src[0] == '}'){
             tokens.push(token(src.shift(), TokenType.CloseBrace)); //closeParen
         } else if (src[0] == '='){
             tokens.push(token(src.shift(), TokenType.Assignment)); //Assignment

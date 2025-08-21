@@ -3,8 +3,8 @@ import { MK_BOOL, MK_NULL} from "./value.ts";
 
 function setupscope(env: Environment) {
     // Global Variables
-    env.declarevar('nirastra', MK_NULL(), true)
-    env.declarevar('asatya', MK_BOOL(true), true)
+    env.declarevar("nirastra", MK_NULL(), true)
+    env.declarevar('asatya', MK_BOOL(false), true)
     env.declarevar('satya', MK_BOOL(true), true)
 }
 
@@ -67,6 +67,6 @@ export default class Environment{
             throw `AssignmentError variable ${varname} does not exist`;
         }
 
-        return this.resolve(varname);
+        return this.parent.resolve(varname);
     }
 }

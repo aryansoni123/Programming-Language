@@ -1,15 +1,24 @@
 // Frontend/ast.ts
 // This file defines the structure of the Abstract Syntax Tree (AST) nodes
 
+import { RuntimeVal } from "../runtime/value.ts";
+
 // The AST is used to represent the structure of the code in a way that is easy to understand
 export type NodeType = 
-    "Program" |
-    "VarDeclaration" |
-    "AssignmentExpression" |
-    "NumericLiteral" |
-    "NullLiteral" |
-    "Identifier" |
-    "BinaryExpression";
+    //Statements
+    | "Program" 
+    | "VarDeclaration" 
+    
+    //Expressions
+    | "AssignmentExpression" 
+    | "BinaryExpression"
+
+    //Literals
+    | "Object"
+    | "Property"
+    | "NumericLiteral" 
+    | "NullLiteral"
+    | "Identifier" ;
 
 // The Stmt interface is the base interface for all AST nodes
 export interface Stmt {
@@ -62,4 +71,15 @@ export interface NumericLiteral extends Expression {
 export interface NullLiteral extends Expression {
     kind: "NullLiteral",
     value : "null";
+}
+
+export interface Property extends Expression {
+    kind: "Property",
+    key: string,
+    value : Expression;
+}
+
+export interface ObjectLiteral extends Expression {
+    kind: "Object",
+    property : Property[];
 }

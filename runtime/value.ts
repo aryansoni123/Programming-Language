@@ -1,4 +1,4 @@
-export type ValueType = "null" | "number" | "boolean";
+export type ValueType = "null" | "sankhya" | "boolean";
 
 export interface RuntimeVal {
     kind: ValueType;
@@ -10,7 +10,7 @@ export interface NullVal extends RuntimeVal {
 }
 
 export interface NumberVal extends RuntimeVal {
-    kind: "number",
+    kind: "sankhya",
     value: number;
 }
 
@@ -19,9 +19,11 @@ export interface BoolVal extends RuntimeVal {
     value: boolean;
 }
 
+//Creation Functions
+
 export function MK_NUMBER(n = 0){
     return {
-        kind: "number",
+        kind: "sankhya",
         value: n
     } as NumberVal;
 
