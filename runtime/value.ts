@@ -1,4 +1,4 @@
-export type ValueType = "null" | "sankhya" | "boolean";
+export type ValueType = "null" | "sankhya" | "boolean" | "object";
 
 export interface RuntimeVal {
     kind: ValueType;
@@ -17,6 +17,11 @@ export interface NumberVal extends RuntimeVal {
 export interface BoolVal extends RuntimeVal {
     kind: "boolean",
     value: boolean;
+}
+
+export interface ObjectVal extends RuntimeVal {
+    kind: "object",
+    value: Map<string, RuntimeVal>;
 }
 
 //Creation Functions
