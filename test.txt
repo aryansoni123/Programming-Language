@@ -1,11 +1,13 @@
-maan z = 20;
+maan foo = 5 * 2;
 
-sthir y = {
-    x: satya,
-    y: nirastra,
-    z: z,
-    b: 45,
-    mix: {
-        a: asatya,
+sthir obj = {
+    x: 100,
+    y: 23,
+    foo: foo, 
+    complex: {
+        bar: satya
     },
 };
+
+print(45/2 + x, foo)
+foo = obj.foo(bar(x,y)) + 3;

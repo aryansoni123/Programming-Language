@@ -11,6 +11,8 @@ export type NodeType =
     //Expressions
     | "AssignmentExpression" 
     | "BinaryExpression"
+    | "MemberExpression"
+    | "CallExpression"
 
     //Literals
     | "Object"
@@ -53,6 +55,19 @@ export interface BinaryExpression extends Expression {
     left: Expression;
     right: Expression;
     operator: string;
+}
+
+export interface CallExpression extends Expression {
+    kind: "CallExpression";
+    args: Expression[];
+    caller: Expression;
+}
+
+export interface MemberExpression extends Expression {
+    kind: "MemberExpression";
+    object: Expression;
+    property: Expression;
+    computed: boolean;
 }
 
 // The Identifier interface represents an identifier in the AST

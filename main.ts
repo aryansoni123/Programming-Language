@@ -1,5 +1,5 @@
 import Parser from "./Frontend/parser.ts";
-import Environment, { CreateGlobalEnv } from "./runtime/environment.ts";
+import { CreateGlobalEnv } from "./runtime/environment.ts";
 import { evaluate } from "./runtime/interpreter.ts";
 
 //xyz();

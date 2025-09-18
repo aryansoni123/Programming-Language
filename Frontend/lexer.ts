@@ -14,8 +14,11 @@ export enum TokenType {
     Colon,
     OpenBrace,
     CloseBrace,
+    OpenBracket,
+    CloseBracket,
     OpenParen,
     CloseParen,
+    Dot,
     Assignment,
     EOF,
 
@@ -71,20 +74,26 @@ export function Tokenize(sourcecode: string) : Token[]{
         }else if (src[0] == ')'){
             tokens.push(token(src.shift(), TokenType.CloseParen)); //closeParen
         }else if (src[0] == '{'){
-            tokens.push(token(src.shift(), TokenType.OpenBrace)); //closeParen
+            tokens.push(token(src.shift(), TokenType.OpenBrace)); //OpenBrace
         }else if (src[0] == '}'){
-            tokens.push(token(src.shift(), TokenType.CloseBrace)); //closeParen
+            tokens.push(token(src.shift(), TokenType.CloseBrace)); //closebrace
+        }else if (src[0] == '['){
+            tokens.push(token(src.shift(), TokenType.OpenBracket)); //Openbracket
+        }else if (src[0] == ']'){
+            tokens.push(token(src.shift(), TokenType.CloseBracket)); //closebracket
         } else if (src[0] == '='){
             tokens.push(token(src.shift(), TokenType.Assignment)); //Assignment
         } else if (src[0] == '+' || src[0] == '-' || src[0] == '*' || src[0] == '/' || src[0] == '%'){
             tokens.push(token(src.shift(), TokenType.BinaryOperator)); // BinaryOperator
         } else if ( src[0]==';' ){
-            tokens.push(token(src.shift(), TokenType.SemiColon)); 
+            tokens.push(token(src.shift(), TokenType.SemiColon)); //Semicolon
         } else if ( src[0]==',' ){
-            tokens.push(token(src.shift(), TokenType.Comma)); 
+            tokens.push(token(src.shift(), TokenType.Comma)); // Comma
         } else if ( src[0]==':' ){
-            tokens.push(token(src.shift(), TokenType.Colon)); 
-        } else{
+            tokens.push(token(src.shift(), TokenType.Colon)); //Colon
+        } else if ( src[0]=='.' ){
+            tokens.push(token(src.shift(), TokenType.Dot)); //Dot
+        }else{
             //6. Multiple characters can be part of a number or identifier
             if (isdigit(src[0])){
                 let num = "";
